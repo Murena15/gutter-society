@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Original Gutter Society Tee</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<main class="product-page">
+
+    <div class="container">
+
+        <div class="product-top-bar">
+
+    <a
+        href="shop.html"
+        class="back-button"
+    >
+        ← Back to Shop
+    </a>
+
+    <button
+        class="nav-icon-button"
+        id="cartButton"
+        type="button"
+        aria-label="Open shopping cart"
+    >
+        🛒
+        <span
+            class="cart-count"
+            id="cartCount"
+        >0</span>
+    </button>
+
+</div>
+
+<div class="product-container">
+
+    <!-- LEFT SIDE -->
+
+    <div class="product-images">
+
+        <img
+            src="images/products/gutter-tee-front.jpg"
+            alt="Original Gutter Society Tee"
+            class="product-main-image"
+        >
+
+        <div class="product-thumbnails">
+
+            <img
+                src="images/products/gutter-tee-front.jpg"
+                class="thumbnail active"
+                alt="Front"
+            >
+
+            <img
+                src="images/products/gutter-tee-back.jpg"
+                class="thumbnail"
+                alt="Back"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="product-info">
+
+  <!-- SIZE -->
+
+<div class="product-option">
+
+    <h3>Select Size</h3>
+
+    <div class="size-buttons">
+
+        <button
+            class="size-btn"
+            data-size="S"
+            type="button"
+        >
+            S
+        </button>
+
+        <button
+            class="size-btn"
+            data-size="M"
+            type="button"
+        >
+            M
+        </button>
+
+        <button
+            class="size-btn"
+            data-size="L"
+            type="button"
+        >
+            L
+        </button>
+
+        <button
+            class="size-btn"
+            data-size="XL"
+            type="button"
+        >
+            XL
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- QUANTITY + ADD TO CART -->
+
+<div class="product-actions">
+
+    <div class="quantity-control">
+
+        <button
+            class="quantity-minus"
+            id="minusBtn"
+            type="button"
+        >
+            −
+        </button>
+
+        <span
+            class="quantity-number"
+            id="quantity"
+        >
+            1
+        </span>
+
+        <button
+            class="quantity-plus"
+            id="plusBtn"
+            type="button"
+        >
+            +
+        </button>
+
+    </div>
+
+    <button
+        class=" product-cart-btn"
+        id="addProductToCart"
+        type="button"
+        data-product="Original Gutter Society Tee"
+        data-price="250"
+    >
+        Add To Cart
+    </button>
+
+</div>
+
+
+<!-- PRODUCT DETAILS -->
+
+<div class="product-extra">
+
+    <h3>Product Details</h3>
+
+    <ul>
+
+        <li>Premium heavyweight cotton</li>
+
+        <li>Relaxed fit</li>
+
+        <li>High quality print</li>
+
+
+    </ul>
+
+</div>
+
+<!-- SHIPPING -->
+
+<div class="product-extra">
+
+    <h3>Shipping</h3>
+
+    <p>
+        Free shipping on orders over R1000.
+    </p>
+
+    <p>
+        Estimated delivery: 2–5 business days.
+    </p>
+
+</div>
+
+
+<!-- RETURNS -->
+
+<div class="product-extra">
+
+    <h3>Returns</h3>
+
+    <p>
+        Returns accepted within 14 days of delivery.
+    </p>
+
+</div>
+
+
+<!-- PRODUCT DETAILS -->
+
+<div class="product-extra">
+
+    <h3>Product Details</h3>
+
+    <ul>
+
+        <li>Premium heavyweight cotton</li>
+
+        <li>Relaxed fit</li>
+
+        <li>High quality print</li>
+
+
+    </ul>
+
+</div>
+
+        <p class="product-brand">
+            Gutter Society
+        </p>
+
+        <h1>
+            Original Gutter Society Tee
+        </h1>
+
+        <p class="product-price">
+            R250
+        </p>
+
+        <p class="product-description">
+
+            Premium heavyweight cotton t-shirt designed for everyday wear.
+
+        </p>
+
+    </div>
+
+</div>
+
+    </div>
+
+    <!-- ======================================
+     RELATED PRODUCTS
+====================================== -->
+
+<section class="related-products">
+
+    <h2>You May Also Like</h2>
+
+    <div class="related-grid">
+
+        <!-- BEANIE -->
+
+        <a href="product-beanie.html" class="related-card">
+
+            <img
+                src="images/products/graffiti-beanie-front.jpg"
+                alt="Graffiti Beanie"
+            >
+
+            <h3>Graffiti Beanie</h3>
+
+            <p>R200</p>
+
+        </a>
+
+
+    
+
+    </div>
+
+</section>
+
+</main>
+
+</main>
+
+<!-- CART -->
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+        <h2>Your Cart</h2>
+
+        <button
+            class="cart-close"
+            id="cartClose"
+            type="button"
+            aria-label="Close cart"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems">
+
+        <p class="empty-cart-message">
+            Your cart is empty.
+        </p>
+
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="cart-total-row">
+
+            <span>Total</span>
+
+            <strong id="cartTotal">
+                R0
+            </strong>
+
+        </div>
+
+        <button
+            class="checkout-btn"
+            id="checkoutButton"
+            type="button"
+        >
+            Checkout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<script src="js/product.js"></script>
+<script src="js/cart.js"></script>
+
+
+<!-- ORDER ADDED POPUP -->
+
+<div class="order-popup" id="orderPopup">
+
+    <div class="order-popup-box">
+
+        <div class="order-popup-icon">
+            ✓
+        </div>
+
+        <h2>
+            Added to Cart
+        </h2>
+
+        <p id="orderPopupMessage">
+            Your item has been added to your cart.
+        </p>
+
+        <button
+            type="button"
+            id="continueShopping"
+        >
+            Continue Shopping
+        </button>
+
+        <button
+            type="button"
+            id="popupViewCart"
+            class="popup-cart-button"
+        >
+            View Cart
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+
+
+</html>

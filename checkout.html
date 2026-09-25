@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Checkout | Gutter Society"
+    >
+
+    <title>Checkout | Gutter Society</title>
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- MAIN CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+    <style>
+
+        /* =========================
+           CHECKOUT PAGE
+        ========================= */
+
+        body {
+            background: #080808;
+            color: #ffffff;
+            font-family: "Inter", sans-serif;
+        }
+
+
+        .checkout-page {
+            padding: 140px 20px 80px;
+            min-height: 100vh;
+        }
+
+
+        .checkout-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+
+        .checkout-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+
+        .checkout-title p {
+            color: #999;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+
+        .checkout-title h1 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 60px;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+        }
+
+
+        .checkout-box {
+            background: #111;
+            border: 1px solid #252525;
+            padding: 30px;
+        }
+
+
+        .checkout-box h2 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 28px;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .checkout-form {
+            display: grid;
+            gap: 18px;
+        }
+
+
+        .form-group {
+            display: grid;
+            gap: 8px;
+        }
+
+
+        .form-group label {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+            box-sizing: border-box;
+
+            background: #080808;
+            color: #ffffff;
+
+            border: 1px solid #333;
+
+            padding: 14px;
+
+            font-family: "Inter", sans-serif;
+
+            outline: none;
+
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #ffffff;
+
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        /* =========================
+           ORDER SUMMARY
+        ========================= */
+
+        .order-items {
+            display: grid;
+            gap: 18px;
+        }
+
+
+        .order-item {
+
+            border-bottom: 1px solid #292929;
+
+            padding-bottom: 18px;
+
+        }
+
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .order-item-name {
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .order-item-details {
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .order-item-price {
+
+            margin-top: 8px;
+
+            font-weight: 600;
+
+        }
+
+
+        .order-total {
+
+            border-top: 1px solid #333;
+
+            margin-top: 20px;
+
+            padding-top: 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 18px;
+
+        }
+
+
+        .order-total strong {
+
+            font-size: 22px;
+
+        }
+
+
+        /* =========================
+           PLACE ORDER
+        ========================= */
+
+        .place-order-btn {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 17px;
+
+            background: #ffffff;
+
+            color: #000000;
+
+            border: none;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .place-order-btn:hover {
+
+            transform: translateY(-2px);
+
+            background: #dddddd;
+
+        }
+
+
+        .place-order-btn:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        .back-shop {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+        }
+
+
+        .back-shop:hover {
+
+            color: #ffffff;
+
+        }
+
+
+        .empty-checkout {
+
+            text-align: center;
+
+            padding: 40px 20px;
+
+            color: #999;
+
+        }
+
+
+        /* =========================
+           PAYMENT MESSAGE
+        ========================= */
+
+        .payment-message {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+        }
+
+
+        .payment-message.show {
+
+            display: block;
+
+        }
+
+
+        .payment-message h2 {
+
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 42px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .payment-message p {
+
+            color: #aaa;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .checkout-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .checkout-title h1 {
+
+                font-size: 48px;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .checkout-box {
+
+                padding: 20px;
+
+            }
+
+
+            .checkout-page {
+
+                padding-top: 110px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header scrolled">
+
+    <nav class="navbar container">
+
+        <a
+            href="index.html"
+            class="nav-logo"
+        >
+
+            <img
+                src="images/logo/gs-logo.png"
+                alt="Gutter Society"
+            >
+
+        </a>
+
+
+        <ul class="nav-links desktop-nav">
+
+            <li>
+                <a href="index.html" class="nav-link">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="shop.html" class="nav-link">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html" class="nav-link">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html" class="nav-link">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     CHECKOUT
+========================= -->
+
+<main class="checkout-page">
+
+    <div class="checkout-container">
+
+
+        <div class="checkout-title">
+
+            <p>Gutter Society</p>
+
+            <h1>Checkout</h1>
+
+        </div>
+
+
+
+        <div id="checkoutContent">
+
+            <div class="checkout-grid">
+
+
+                <!-- =========================
+                     CUSTOMER INFORMATION
+                ========================= -->
+
+                <div class="checkout-box">
+
+                    <h2>Customer Details</h2>
+
+
+                    <form
+                        class="checkout-form"
+                        id="checkoutForm"
+                    >
+
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                required
+                                placeholder="Your full name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                required
+                                placeholder="you@example.com"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                required
+                                placeholder="Your phone number"
+                            >
+
+                        </div>
+
+
+                        <h2 style="margin-top:20px;">
+                            Delivery Details
+                        </h2>
+
+
+                        <div class="form-group">
+
+                            <label for="address">
+                                Street Address
+                            </label>
+
+                            <input
+                                type="text"
+                                id="address"
+                                required
+                                placeholder="Street address"
+                            >
+
+                        </div>
+
+
+                        <div class="form-row">
+
+
+                            <div class="form-group">
+
+                                <label for="city">
+                                    City
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    required
+                                    placeholder="City"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="province">
+                                    Province
+                                </label>
+
+                                <select
+                                    id="province"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="Gauteng">
+                                        Gauteng
+                                    </option>
+
+                                    <option value="Western Cape">
+                                        Western Cape
+                                    </option>
+
+                                    <option value="KwaZulu-Natal">
+                                        KwaZulu-Natal
+                                    </option>
+
+                                    <option value="Eastern Cape">
+                                        Eastern Cape
+                                    </option>
+
+                                    <option value="Free State">
+                                        Free State
+                                    </option>
+
+                                    <option value="Limpopo">
+                                        Limpopo
+                                    </option>
+
+                                    <option value="Mpumalanga">
+                                        Mpumalanga
+                                    </option>
+
+                                    <option value="North West">
+                                        North West
+                                    </option>
+
+                                    <option value="Northern Cape">
+                                        Northern Cape
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="postal">
+                                Postal Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="postal"
+                                required
+                                placeholder="Postal code"
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="place-order-btn"
+                        >
+                            PROCEED TO PAYMENT
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- =========================
+                     ORDER SUMMARY
+                ========================= -->
+
+                <div class="checkout-box">
+
+                    <h2>Your Order</h2>
+
+
+                    <div
+                        class="order-items"
+                        id="orderItems"
+                    ></div>
+
+
+                    <div class="order-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="orderTotal">
+                            R0
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        href="shop.html"
+                        class="back-shop"
+                    >
+                        ← Continue Shopping
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             PAYMENT MESSAGE
+        ========================= -->
+
+        <div
+            class="payment-message"
+            id="paymentMessage"
+        >
+
+            <h2>
+                Redirecting To Payment
+            </h2>
+
+            <p>
+                Please wait while we securely redirect
+                you to PayFast.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+"use strict";
+
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://fwkewtafidvthvtishax.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_vimLxkw6PKtPBwzbCuZehg_jwCzaRJZ";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   LOAD CART
+========================= */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("gutterCart")
+    ) || [];
+
+
+const orderItems =
+    document.getElementById("orderItems");
+
+const orderTotal =
+    document.getElementById("orderTotal");
+
+const checkoutForm =
+    document.getElementById("checkoutForm");
+
+const checkoutContent =
+    document.getElementById("checkoutContent");
+
+const paymentMessage =
+    document.getElementById("paymentMessage");
+
+
+/* =========================
+   DISPLAY ORDER
+========================= */
+
+function displayOrder() {
+
+    orderItems.innerHTML = "";
+
+    if (cart.length === 0) {
+
+        orderItems.innerHTML = `
+
+            <div class="empty-checkout">
+
+                Your cart is empty.
+
+                <br><br>
+
+                <a
+                    href="shop.html"
+                    class="back-shop"
+                >
+                    Go Back To Shop
+                </a>
+
+            </div>
+
+        `;
+
+        orderTotal.textContent = "R0";
+
+        return;
+    }
+
+
+    let total = 0;
+
+
+    cart.forEach((item) => {
+
+        const itemPrice =
+            Number(item.price);
+
+        const itemQuantity =
+            Number(item.quantity);
+
+        const itemTotal =
+            itemPrice * itemQuantity;
+
+        total += itemTotal;
+
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "order-item";
+
+
+        div.innerHTML = `
+
+            <div class="order-item-name">
+                ${escapeHtml(item.product)}
+            </div>
+
+            <div class="order-item-details">
+
+                Size:
+                ${escapeHtml(item.size || "One Size")}
+
+                <br>
+
+                Quantity:
+                ${itemQuantity}
+
+            </div>
+
+            <div class="order-item-price">
+                R${itemTotal.toFixed(2)}
+            </div>
+
+        `;
+
+
+        orderItems.appendChild(div);
+
+    });
+
+
+    orderTotal.textContent =
+        `R${total.toFixed(2)}`;
+
+}
+
+
+displayOrder();
+
+
+/* =========================
+   GENERATE ORDER NUMBER
+========================= */
+
+function generateOrderNumber() {
+
+    const now =
+        new Date();
+
+    const timestamp =
+        now.getTime();
+
+    const random =
+        Math.floor(
+            1000 + Math.random() * 9000
+        );
+
+    return `GS-${timestamp}-${random}`;
+
+}
+
+
+/* =========================
+   SPLIT CUSTOMER NAME
+========================= */
+
+function splitName(fullName) {
+
+    const parts =
+        fullName
+            .trim()
+            .split(/\s+/);
+
+    const firstName =
+        parts.shift() || "";
+
+    const lastName =
+        parts.join(" ");
+
+    return {
+        firstName,
+        lastName
+    };
+
+}
+
+
+/* =========================
+   SUBMIT ORDER
+========================= */
+
+checkoutForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        if (cart.length === 0) {
+
+            alert(
+                "Your cart is empty."
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           CUSTOMER DETAILS
+        ========================= */
+
+        const customerName =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+        const customerEmail =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+        const customerPhone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
+
+        const customerAddress =
+            document
+                .getElementById("address")
+                .value
+                .trim();
+
+        const customerCity =
+            document
+                .getElementById("city")
+                .value
+                .trim();
+
+        const customerProvince =
+            document
+                .getElementById("province")
+                .value;
+
+        const customerPostal =
+            document
+                .getElementById("postal")
+                .value
+                .trim();
+
+
+        /* =========================
+           CALCULATE TOTAL
+        ========================= */
+
+        const total =
+            cart.reduce(
+                (sum, item) =>
+                    sum +
+                    Number(item.price) *
+                    Number(item.quantity),
+                0
+            );
+
+
+        if (
+            !Number.isFinite(total) ||
+            total <= 0
+        ) {
+
+            alert(
+                "There is a problem with your order total."
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           CREATE ORDER NUMBER
+        ========================= */
+
+        const orderNumber =
+            generateOrderNumber();
+
+
+        /* =========================
+           PREPARE PRODUCTS
+        ========================= */
+
+        const products =
+            cart.map((item) => ({
+
+                product:
+                    item.product,
+
+                price:
+                    Number(item.price),
+
+                quantity:
+                    Number(item.quantity),
+
+                size:
+                    item.size || "One Size"
+
+            }));
+
+
+        /* =========================
+           CREATE PENDING ORDER
+        ========================= */
+
+        const order = {
+
+            order_number:
+                orderNumber,
+
+            customer_name:
+                customerName,
+
+            customer_email:
+                customerEmail,
+
+            phone:
+                customerPhone,
+
+            address:
+                customerAddress,
+
+            city:
+                customerCity,
+
+            province:
+                customerProvince,
+
+            postal_code:
+                customerPostal,
+
+            products:
+                products,
+
+            total:
+                Number(total.toFixed(2)),
+
+            status:
+                "New",
+
+            payment_status:
+                "Pending"
+
+        };
+
+
+        /* =========================
+           DISABLE BUTTON
+        ========================= */
+
+        const button =
+            checkoutForm.querySelector(
+                ".place-order-btn"
+            );
+
+        button.disabled = true;
+
+        button.textContent =
+            "PROCESSING...";
+
+
+        /* =========================
+           SAVE ORDER TO SUPABASE
+        ========================= */
+
+        const {
+            error: orderError
+        } =
+            await supabaseClient
+                .from("orders")
+                .insert([order]);
+
+
+        /* =========================
+           SUPABASE ERROR
+        ========================= */
+
+        if (orderError) {
+
+            console.error(
+                "SUPABASE ORDER ERROR:",
+                orderError
+            );
+
+            alert(
+                "ORDER ERROR:\n\n" +
+                orderError.message
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "PROCEED TO PAYMENT";
+
+            return;
+
+        }
+
+
+        /* =========================
+           SPLIT NAME
+        ========================= */
+
+        const {
+            firstName,
+            lastName
+        } =
+            splitName(customerName);
+
+
+        /* =========================
+           SHOW PAYMENT MESSAGE
+        ========================= */
+
+        checkoutContent.style.display =
+            "none";
+
+        paymentMessage.classList.add(
+            "show"
+        );
+
+
+        /* =========================
+           CREATE PAYFAST PAYMENT
+        ========================= */
+
+        try {
+
+            const paymentResponse =
+                await fetch(
+                    "/.netlify/functions/create-payment",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                orderNumber:
+                                    orderNumber,
+
+                                firstName:
+                                    firstName,
+
+                                lastName:
+                                    lastName,
+
+                                email:
+                                    customerEmail,
+
+                                phone:
+                                    customerPhone
+
+                            })
+
+                    }
+                );
+
+
+            /* =========================
+               PAYMENT FUNCTION ERROR
+            ========================= */
+
+            if (!paymentResponse.ok) {
+
+                const errorText =
+                    await paymentResponse.text();
+
+                console.error(
+                    "PAYFAST FUNCTION ERROR:",
+                    errorText
+                );
+
+                throw new Error(
+                    "Could not start PayFast payment."
+                );
+
+            }
+
+
+            /* =========================
+               GET PAYFAST HTML
+            ========================= */
+
+            const paymentHtml =
+                await paymentResponse.text();
+
+
+            if (
+                !paymentHtml ||
+                !paymentHtml.includes(
+                    "payfastForm"
+                )
+            ) {
+
+                console.error(
+                    "Invalid PayFast response:",
+                    paymentHtml
+                );
+
+                throw new Error(
+                    "Invalid PayFast payment response."
+                );
+
+            }
+
+
+            /* =========================
+               SAVE ORDER NUMBER
+            ========================= */
+
+            localStorage.setItem(
+                "lastOrderNumber",
+                orderNumber
+            );
+
+
+            /* =========================
+               CLEAR CART
+            ========================= */
+
+            localStorage.removeItem(
+                "gutterCart"
+            );
+
+
+            /* =========================
+               LOAD PAYFAST PAGE
+            ========================= */
+
+            document.open();
+
+            document.write(
+                paymentHtml
+            );
+
+            document.close();
+
+
+        } catch (paymentError) {
+
+            console.error(
+                "PAYFAST PAYMENT ERROR:",
+                paymentError
+            );
+
+
+            alert(
+                "We could not start the payment.\n\n" +
+                "Your order has been saved, but payment was not started.\n\n" +
+                "Please try again."
+            );
+
+
+            paymentMessage.classList.remove(
+                "show"
+            );
+
+            checkoutContent.style.display =
+                "block";
+
+            button.disabled = false;
+
+            button.textContent =
+                "PROCEED TO PAYMENT";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   HTML ESCAPING
+========================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+</body>
+
+</html>

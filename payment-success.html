@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Payment Successful | Gutter Society"
+    >
+
+    <title>Payment Successful | Gutter Society</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+    <style>
+
+        body {
+
+            background: #080808;
+            color: #ffffff;
+
+            font-family: "Inter", sans-serif;
+
+            min-height: 100vh;
+
+        }
+
+
+        .success-page {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 40px 20px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .success-box {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background: #111;
+
+            border: 1px solid #252525;
+
+            padding: 55px 35px;
+
+            text-align: center;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .success-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            border: 2px solid #ffffff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 30px;
+
+            font-size: 32px;
+
+        }
+
+
+        .success-box h1 {
+
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 55px;
+
+            letter-spacing: 2px;
+
+            margin: 0 0 15px;
+
+        }
+
+
+        .success-box p {
+
+            color: #aaa;
+
+            line-height: 1.7;
+
+            margin: 10px 0;
+
+        }
+
+
+        .order-number {
+
+            color: #ffffff !important;
+
+            font-weight: 700;
+
+            font-size: 18px;
+
+            margin-top: 25px !important;
+
+        }
+
+
+        .payment-status {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 10px 18px;
+
+            border: 1px solid #333;
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .back-shop {
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 15px 25px;
+
+            background: #ffffff;
+
+            color: #000000;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .back-shop:hover {
+
+            background: #dddddd;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .success-box {
+
+                padding: 45px 25px;
+
+            }
+
+
+            .success-box h1 {
+
+                font-size: 45px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="success-page">
+
+
+    <div class="success-box">
+
+
+        <div class="success-icon">
+
+            ✓
+
+        </div>
+
+
+        <h1>
+            Payment Received
+        </h1>
+
+
+        <p>
+
+            Thank you for your order with
+            Gutter Society.
+
+        </p>
+
+
+        <p>
+
+            Your payment has been submitted
+            successfully.
+
+        </p>
+
+
+        <p
+            class="order-number"
+            id="orderNumber"
+        >
+            Order Number: Loading...
+        </p>
+
+
+        <div class="payment-status">
+
+            Payment Processing
+
+        </div>
+
+
+        <p>
+
+            Your order will be confirmed once
+            PayFast sends the final payment
+            confirmation to our system.
+
+        </p>
+
+
+        <a
+            href="shop.html"
+            class="back-shop"
+        >
+
+            BACK TO SHOP
+
+        </a>
+
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+"use strict";
+
+
+/* =========================
+   GET ORDER NUMBER
+========================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const orderNumber =
+    params.get("order");
+
+
+const orderNumberElement =
+    document.getElementById(
+        "orderNumber"
+    );
+
+
+if (orderNumber) {
+
+    orderNumberElement.textContent =
+        `Order Number: ${orderNumber}`;
+
+} else {
+
+    orderNumberElement.textContent =
+        "Order Number: Not available";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

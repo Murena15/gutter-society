@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Gutter Society — underground streetwear built from the bottom."
+    >
+
+    <title>Gutter Society | Welcome to the Gutter Society</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <img
+            src="images/logo/gs-logo.png"
+            alt="Gutter Society logo"
+            class="loader-logo"
+        >
+
+        <p class="loader-text">Welcome to the gutter</p>
+
+        <div class="loader-line">
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+
+            <a href="index.html" class="nav-logo">
+
+    <img
+        src="images/logo/gs-logo.png"
+        alt="Gutter Society"
+        draggable="false"
+    >
+
+</a>
+
+            <ul class="nav-links" id="navLinks">
+                <li>
+                    <a href="index.html" class="nav-link active">Home</a>
+                </li>
+
+                <li>
+                    <a href="shop.html" class="nav-link">Shop</a>
+                </li>
+
+                <li>
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+
+                <button
+                    class="nav-icon-button"
+                    type="button"
+                    aria-label="Open shopping cart"
+                    id="cartButton"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20.5 8H7"
+                        ></path>
+
+                        <circle cx="10" cy="20" r="1"></circle>
+                        <circle cx="18" cy="20" r="1"></circle>
+                    </svg>
+
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+
+                <button
+                    class="menu-button"
+                    id="menuButton"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+                    <span></span>
+                    <span></span>
+                </button>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+
+            <div class="hero-noise"></div>
+            <div class="hero-glow"></div>
+
+            <div class="hero-watermark" aria-hidden="true">
+                GS
+            </div>
+
+            <div class="hero-content container">
+
+                <p class="hero-label">
+                    Independent South African streetwear
+                </p>
+
+                <h1 class="hero-title">
+                    <span>Welcome</span>
+                    <span>to the</span>
+                    <span class="outlined-text">gutter.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Built from the bottom. Made for those who refuse
+                    to disappear into the crowd.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="shop.html" class="button button-light">
+                        Shop the drop
+                        <span aria-hidden="true">↗</span>
+                    </a>
+
+                    <a href="#featured" class="button button-outline">
+                        Explore
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-side-text" aria-hidden="true">
+                GUTTER SOCIETY — 2026
+            </div>
+
+            <a href="#featured" class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </a>
+
+        </section>
+
+       <!-- ===========================
+     FEATURED DROP
+============================ -->
+
+<section class="featured-drop" id="featured">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-tag">
+                Latest Collection
+            </p>
+
+            <h2>
+                Featured Drop
+            </h2>
+
+            <p class="section-text">
+                Built for those who stand out.
+                Limited pieces. No restocks.
+            </p>
+
+        </div>
+
+        <div class="products-grid">
+
+            <!-- PRODUCT 1 -->
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="images/products/gutter-tee-front.jpg"
+                        alt="Original Gutter Society Tee"
+                    >
+
+                    <div class="product-overlay">
+
+                        <a
+                            href="shop.html"
+                            class="quick-view"
+                        >
+                            View Product
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Original Gutter Society Tee
+                    </h3>
+
+                    <p class="price">
+                        R250
+                    </p>
+
+                </div>
+
+            </article>
+
+            <button
+    class="quick-view-btn"
+    type="button"
+>
+    Quick View
+</button>
+
+            <!-- PRODUCT 2 -->
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="images/products/graffiti-beanie-front.jpg"
+                        alt="Graffiti Beanie"
+                    >
+
+                    <div class="product-overlay">
+
+                        <a
+                            href="shop.html"
+                            class="quick-view"
+                        >
+                            View Product
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Graffiti Beanie
+                    </h3>
+
+                    <p class="price">
+                        R200
+                    </p>
+
+                </div>
+
+            </article>
+            <button
+    class="quick-view-btn"
+    type="button"
+>
+    Quick View
+</button>
+
+        </div>
+
+    </div>
+
+</section>
+    </main>
+    <!-- ===========================
+     ABOUT GUTTER SOCIETY
+============================ -->
+
+<section class="about-section" id="about">
+
+    <div class="container about-grid">
+
+        <div class="about-left">
+
+            <p class="about-tag">
+                Our Story
+            </p>
+
+            <h2 class="about-title">
+                Born from the bottom.
+            </h2>
+
+        </div>
+
+        <div class="about-right">
+
+            <p class="about-text">
+                Gutter Society is more than clothing.
+                It represents individuality, resilience
+                and the confidence to stand apart.
+            </p>
+
+            <p class="about-text">
+                Every piece is created for those who
+                express themselves without needing
+                approval from the crowd.
+            </p>
+
+            <a href="about.html" class="about-link">
+                Discover our story
+                <span>↗</span>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="about-banner">
+
+        <div class="about-banner-track">
+
+            <span>GUTTER SOCIETY</span>
+            <span>WELCOME TO THE GUTTER</span>
+            <span>GUTTER SOCIETY</span>
+            <span>WELCOME TO THE GUTTER</span>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ===========================
+     BEST SELLERS
+============================ -->
+
+<section class="best-sellers">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-tag">
+                Most Popular
+            </p>
+
+            <h2>
+                Best Sellers
+            </h2>
+
+        </div>
+
+        <div class="best-grid">
+
+            <!-- Shirt -->
+
+            <article class="best-card">
+
+                <img
+                    src="images/products/gutter-tee-front.jpg"
+                    alt="Original Gutter Society Tee"
+                >
+
+                <div class="best-info">
+
+                    <h3>
+                        Original Gutter Society Tee
+                    </h3>
+
+                    <p>
+                        R250
+                    </p>
+
+                    <a href="shop.html" class="best-btn">
+
+                        Shop Now
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            <!-- Beanie -->
+
+            <article class="best-card">
+
+                <img
+                    src="images/products/graffiti-beanie-front.jpg"
+                    alt="Graffiti Beanie"
+                >
+
+                <div class="best-info">
+
+                    <h3>
+                        Graffiti Beanie
+                    </h3>
+
+                    <p>
+                        R200
+                    </p>
+
+                    <a href="shop.html" class="best-btn">
+
+                        Shop Now
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+  <script>
+    const loader = document.getElementById("loader");
+
+    setTimeout(() => {
+        loader.classList.add("hidden");
+        document.body.classList.remove("no-scroll");
+    }, 1800);
+</script>
+
+<script src="js/script.js"></script>
+</body>
+<!-- ===========================
+     FOOTER
+============================ -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div>
+
+            <img
+                src="images/logo/gs-logo.png"
+                alt="Gutter Society"
+                class="footer-logo"
+            >
+
+            <p class="footer-text">
+
+                Built from the bottom.
+                Worn with confidence.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Navigation
+            </h4>
+
+            <ul>
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="shop.html">Shop</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Contact
+            </h4>
+
+            <p>
+
+                guttersociety.00@gmail.com
+
+            </p>
+
+            <p>
+
+                South Africa
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 Gutter Society.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+</html>

@@ -1,0 +1,1669 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>Gutter Society | Owner Dashboard</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #080808;
+            color: #fff;
+            font-family: "Inter", sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            background: #111;
+            border: 1px solid #292929;
+            padding: 40px;
+        }
+
+        .login-logo {
+            width: 100px;
+            display: block;
+            margin: 0 auto 30px;
+        }
+
+        .login-box h1 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 42px;
+            text-align: center;
+            letter-spacing: 2px;
+            margin: 0 0 8px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .login-form label {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 7px;
+            background: #080808;
+            color: #fff;
+            border: 1px solid #333;
+            outline: none;
+        }
+
+        .login-form input:focus {
+            border-color: #fff;
+        }
+
+        .login-btn {
+            margin-top: 10px;
+            padding: 15px;
+            border: none;
+            background: #fff;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #ddd;
+        }
+
+        .login-error {
+            display: none;
+            color: #ff7777;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .dashboard.show {
+            display: block;
+        }
+
+        .topbar {
+            border-bottom: 1px solid #222;
+            padding: 18px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .owner-email {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 9px 14px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            border-color: #fff;
+        }
+
+
+        .dashboard-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 45px 25px;
+        }
+
+        .dashboard-heading {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-heading p {
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-heading h1 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 52px;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: #111;
+            border: 1px solid #292929;
+            padding: 25px;
+        }
+
+        .stat-card span {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           ORDERS
+        ========================= */
+
+        .orders-box {
+            background: #111;
+            border: 1px solid #292929;
+        }
+
+        .orders-header {
+            padding: 22px;
+            border-bottom: 1px solid #292929;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .orders-header h2 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 28px;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .search-input {
+            background: #080808;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 11px 13px;
+            width: 240px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #fff;
+        }
+
+
+        .orders-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 17px 20px;
+            text-align: left;
+            border-bottom: 1px solid #222;
+            white-space: nowrap;
+        }
+
+        .orders-table th {
+            color: #777;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .orders-table td {
+            font-size: 13px;
+        }
+
+        .orders-table tbody tr:hover {
+            background: #151515;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 7px 12px;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            border-color: #fff;
+        }
+
+
+        .status-select {
+            background: #080808;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 7px;
+            outline: none;
+        }
+
+
+        .empty-orders {
+            text-align: center;
+            color: #777;
+            padding: 50px 20px;
+        }
+
+
+        /* =========================
+           ORDER MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .order-modal {
+            background: #111;
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .detail-section {
+            border-top: 1px solid #292929;
+            padding: 18px 0;
+        }
+
+        .detail-section:first-of-type {
+            border-top: none;
+        }
+
+        .detail-section h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #777;
+            margin: 0 0 12px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .detail-row span:first-child {
+            color: #888;
+        }
+
+        .product-line {
+            border-bottom: 1px solid #222;
+            padding: 10px 0;
+        }
+
+        .product-line:last-child {
+            border-bottom: none;
+        }
+
+        .product-line strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .product-line span {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .modal-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            padding-top: 18px;
+            margin-top: 10px;
+            border-top: 1px solid #333;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .owner-email {
+                display: none;
+            }
+
+            .dashboard-container {
+                padding: 30px 15px;
+            }
+
+            .dashboard-heading h1 {
+                font-size: 42px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card {
+                padding: 18px;
+            }
+
+            .stat-card strong {
+                font-size: 24px;
+            }
+
+            .orders-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .login-box {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     LOGIN SCREEN
+========================= -->
+
+<section
+    class="login-screen"
+    id="loginScreen"
+>
+
+    <div class="login-box">
+
+        <img
+            src="images/logo/gs-logo.png"
+            alt="Gutter Society"
+            class="login-logo"
+        >
+
+        <h1>Owner Login</h1>
+
+        <p class="login-subtitle">
+            Gutter Society Order Management
+        </p>
+
+
+        <form
+            class="login-form"
+            id="loginForm"
+        >
+
+            <label>
+
+                Email
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    required
+                    autocomplete="email"
+                >
+
+            </label>
+
+
+            <label>
+
+                Password
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    required
+                    autocomplete="current-password"
+                >
+
+            </label>
+
+
+            <p
+                class="login-error"
+                id="loginError"
+            >
+                Incorrect email or password.
+            </p>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+                LOGIN
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section
+    class="dashboard"
+    id="dashboard"
+>
+
+    <header class="topbar">
+
+        <div class="brand">
+            GUTTER SOCIETY
+        </div>
+
+        <div class="topbar-right">
+
+            <span
+                class="owner-email"
+                id="ownerEmail"
+            ></span>
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard-container">
+
+
+        <div class="dashboard-heading">
+
+            <p>
+                Owner Dashboard
+            </p>
+
+            <h1>
+                Orders
+            </h1>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <span>
+                    Total Orders
+                </span>
+
+                <strong id="totalOrders">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    New Orders
+                </span>
+
+                <strong id="newOrders">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Completed
+                </span>
+
+                <strong id="completedOrders">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Total Sales
+                </span>
+
+                <strong id="totalSales">
+                    R0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDERS -->
+
+        <section class="orders-box">
+
+            <div class="orders-header">
+
+                <h2>
+                    All Orders
+                </h2>
+
+                <input
+                    type="search"
+                    class="search-input"
+                    id="searchOrders"
+                    placeholder="Search orders..."
+                >
+
+            </div>
+
+
+            <div class="orders-table-wrapper">
+
+                <table class="orders-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Order
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="ordersBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</section>
+
+
+
+<!-- =========================
+     ORDER MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="modalOverlay"
+>
+
+    <div class="order-modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalOrderNumber">
+                Order
+            </h2>
+
+            <button
+                class="close-modal"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div id="orderDetails"></div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+"use strict";
+
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://fwkewtafidvthvtishax.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_vimLxkw6PKtPBwzbCuZehg_jwCzaRJZ";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const loginScreen =
+    document.getElementById("loginScreen");
+
+const dashboard =
+    document.getElementById("dashboard");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const loginError =
+    document.getElementById("loginError");
+
+const ownerEmail =
+    document.getElementById("ownerEmail");
+
+const ordersBody =
+    document.getElementById("ordersBody");
+
+const searchOrders =
+    document.getElementById("searchOrders");
+
+const totalOrders =
+    document.getElementById("totalOrders");
+
+const newOrders =
+    document.getElementById("newOrders");
+
+const completedOrders =
+    document.getElementById("completedOrders");
+
+const totalSales =
+    document.getElementById("totalSales");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const modalOverlay =
+    document.getElementById("modalOverlay");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+const modalOrderNumber =
+    document.getElementById("modalOrderNumber");
+
+const orderDetails =
+    document.getElementById("orderDetails");
+
+
+let allOrders = [];
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        loginError.classList.remove("show");
+
+
+        const email =
+            document
+                .getElementById("loginEmail")
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById("loginPassword")
+                .value;
+
+
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+
+        if (error) {
+
+            console.error(error);
+
+            loginError.textContent =
+                "Login failed. Check your email and password.";
+
+            loginError.classList.add("show");
+
+            return;
+
+        }
+
+
+        showDashboard(
+            data.user
+        );
+
+    }
+);
+
+
+/* =========================
+   CHECK EXISTING SESSION
+========================= */
+
+async function checkSession() {
+
+    const {
+        data: {
+            session
+        }
+    } =
+        await supabaseClient.auth.getSession();
+
+
+    if (session) {
+
+        showDashboard(
+            session.user
+        );
+
+    }
+
+}
+
+
+checkSession();
+
+
+/* =========================
+   SHOW DASHBOARD
+========================= */
+
+async function showDashboard(user) {
+
+    loginScreen.style.display =
+        "none";
+
+    dashboard.classList.add(
+        "show"
+    );
+
+    ownerEmail.textContent =
+        user.email || "";
+
+    await loadOrders();
+
+}
+
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
+async function loadOrders() {
+
+    ordersBody.innerHTML = `
+        <tr>
+            <td colspan="6" style="text-align:center;padding:40px;">
+                Loading orders...
+            </td>
+        </tr>
+    `;
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("orders")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        ordersBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center;padding:40px;">
+                    Unable to load orders.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    allOrders =
+        data || [];
+
+
+    updateStats();
+
+    displayOrders(
+        allOrders
+    );
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats() {
+
+    const total =
+        allOrders.length;
+
+
+    const newCount =
+        allOrders.filter(
+            order =>
+                order.status === "New"
+        ).length;
+
+
+    const completedCount =
+        allOrders.filter(
+            order =>
+                order.status === "Completed"
+        ).length;
+
+
+    const sales =
+        allOrders.reduce(
+            (sum, order) =>
+                sum +
+                Number(order.total || 0),
+            0
+        );
+
+
+    totalOrders.textContent =
+        total;
+
+
+    newOrders.textContent =
+        newCount;
+
+
+    completedOrders.textContent =
+        completedCount;
+
+
+    totalSales.textContent =
+        `R${sales.toFixed(2)}`;
+
+}
+
+
+/* =========================
+   DISPLAY ORDERS
+========================= */
+
+function displayOrders(orders) {
+
+    ordersBody.innerHTML = "";
+
+
+    if (orders.length === 0) {
+
+        ordersBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty-orders"
+                >
+                    No orders found.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    orders.forEach(
+        order => {
+
+            const row =
+                document.createElement("tr");
+
+
+            const date =
+                new Date(
+                    order.created_at
+                ).toLocaleString(
+                    "en-ZA",
+                    {
+                        dateStyle: "medium",
+                        timeStyle: "short"
+                    }
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    <strong>
+                        ${escapeHTML(order.order_number)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${escapeHTML(order.customer_name)}
+                </td>
+
+                <td>
+                    ${date}
+                </td>
+
+                <td>
+                    R${Number(order.total).toFixed(2)}
+                </td>
+
+                <td>
+
+                    <select
+                        class="status-select"
+                        data-id="${order.id}"
+                    >
+
+                        <option
+                            value="New"
+                            ${order.status === "New" ? "selected" : ""}
+                        >
+                            New
+                        </option>
+
+                        <option
+                            value="Processing"
+                            ${order.status === "Processing" ? "selected" : ""}
+                        >
+                            Processing
+                        </option>
+
+                        <option
+                            value="Completed"
+                            ${order.status === "Completed" ? "selected" : ""}
+                        >
+                            Completed
+                        </option>
+
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="view-btn"
+                        data-id="${order.id}"
+                    >
+                        View
+                    </button>
+
+                </td>
+
+            `;
+
+
+            ordersBody.appendChild(
+                row
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(".status-select")
+        .forEach(
+            select => {
+
+                select.addEventListener(
+                    "change",
+                    function() {
+
+                        updateOrderStatus(
+                            this.dataset.id,
+                            this.value
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(".view-btn")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const order =
+                            allOrders.find(
+                                item =>
+                                    String(item.id) ===
+                                    String(this.dataset.id)
+                            );
+
+
+                        if (order) {
+
+                            showOrderDetails(
+                                order
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+searchOrders.addEventListener(
+    "input",
+    function() {
+
+        const query =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        const filtered =
+            allOrders.filter(
+                order =>
+
+                    String(
+                        order.order_number
+                    )
+                        .toLowerCase()
+                        .includes(query)
+
+                    ||
+
+                    String(
+                        order.customer_name
+                    )
+                        .toLowerCase()
+                        .includes(query)
+
+                    ||
+
+                    String(
+                        order.customer_email
+                    )
+                        .toLowerCase()
+                        .includes(query)
+
+            );
+
+
+        displayOrders(
+            filtered
+        );
+
+    }
+);
+
+
+/* =========================
+   UPDATE STATUS
+========================= */
+
+async function updateOrderStatus(
+    orderId,
+    newStatus
+) {
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("orders")
+            .update({
+                status: newStatus
+            })
+            .eq(
+                "id",
+                orderId
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to update order status."
+        );
+
+        return;
+
+    }
+
+
+    await loadOrders();
+
+}
+
+
+/* =========================
+   ORDER DETAILS
+========================= */
+
+function showOrderDetails(
+    order
+) {
+
+    modalOrderNumber.textContent =
+        order.order_number;
+
+
+    let productsHTML = "";
+
+
+    let products = [];
+
+
+    try {
+
+        products =
+            typeof order.products === "string"
+                ? JSON.parse(order.products)
+                : order.products;
+
+    } catch (error) {
+
+        products = [];
+
+    }
+
+
+    if (Array.isArray(products)) {
+
+        products.forEach(
+            product => {
+
+                const quantity =
+                    Number(
+                        product.quantity || 1
+                    );
+
+
+                const price =
+                    Number(
+                        product.price || 0
+                    );
+
+
+                const itemTotal =
+                    price * quantity;
+
+
+                productsHTML += `
+
+                    <div class="product-line">
+
+                        <strong>
+                            ${escapeHTML(
+                                product.product ||
+                                "Product"
+                            )}
+                        </strong>
+
+                        <span>
+                            Size:
+                            ${escapeHTML(
+                                product.size ||
+                                "One Size"
+                            )}
+
+                            &nbsp; | &nbsp;
+
+                            Quantity:
+                            ${quantity}
+
+                            &nbsp; | &nbsp;
+
+                            R${itemTotal.toFixed(2)}
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    orderDetails.innerHTML = `
+
+        <div class="detail-section">
+
+            <h3>
+                Customer
+            </h3>
+
+            <div class="detail-row">
+                <span>Name</span>
+                <strong>
+                    ${escapeHTML(order.customer_name)}
+                </strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Email</span>
+                <strong>
+                    ${escapeHTML(order.customer_email)}
+                </strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Phone</span>
+                <strong>
+                    ${escapeHTML(order.phone)}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <h3>
+                Delivery
+            </h3>
+
+            <div class="detail-row">
+                <span>Address</span>
+                <strong>
+                    ${escapeHTML(order.address)}
+                </strong>
+            </div>
+
+            <div class="detail-row">
+                <span>City</span>
+                <strong>
+                    ${escapeHTML(order.city)}
+                </strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Province</span>
+                <strong>
+                    ${escapeHTML(order.province)}
+                </strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Postal Code</span>
+                <strong>
+                    ${escapeHTML(order.postal_code)}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <h3>
+                Products
+            </h3>
+
+            ${productsHTML || "No products found."}
+
+        </div>
+
+
+        <div class="modal-total">
+
+            <span>
+                Total
+            </span>
+
+            <strong>
+                R${Number(order.total).toFixed(2)}
+            </strong>
+
+        </div>
+
+    `;
+
+
+    modalOverlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+closeModal.addEventListener(
+    "click",
+    function() {
+
+        modalOverlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+modalOverlay.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            modalOverlay
+        ) {
+
+            modalOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener(
+    "click",
+    async function() {
+
+        await supabaseClient.auth.signOut();
+
+        dashboard.classList.remove(
+            "show"
+        );
+
+        loginScreen.style.display =
+            "flex";
+
+        loginForm.reset();
+
+    }
+);
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```

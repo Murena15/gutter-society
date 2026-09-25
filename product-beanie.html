@@ -1,0 +1,412 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Graffiti Beanie | Gutter Society</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<main class="product-page">
+
+    <div class="container">
+
+        <!-- TOP BAR -->
+
+        <div class="product-top-bar">
+
+            <a
+                href="shop.html"
+                class="back-button"
+            >
+                ← Back to Shop
+            </a>
+
+            <button
+                class="nav-icon-button"
+                id="cartButton"
+                type="button"
+                aria-label="Open shopping cart"
+            >
+                🛒
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >0</span>
+
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT CONTAINER -->
+
+        <div class="product-container">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="product-images">
+
+                <img
+                    src="images/products/graffiti-beanie-front.jpg"
+                    alt="Graffiti Beanie"
+                    class="product-main-image"
+                >
+
+
+                <div class="product-thumbnails">
+
+                    <img
+                        src="images/products/graffiti-beanie-front.jpg"
+                        class="thumbnail active"
+                        alt="Graffiti Beanie Front"
+                    >
+
+                    <img
+                        src="images/products/graffiti-beanie-back.jpg"
+                        class="thumbnail"
+                        alt="Graffiti Beanie Back"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="product-info">
+
+
+                <!-- SIZE -->
+
+                <div class="product-option">
+
+                    <h3>
+                        Size
+                    </h3>
+
+                    <div class="size-buttons">
+
+                        <button
+                            class="size-btn selected"
+                            data-size="One Size"
+                            type="button"
+                        >
+                            One Size
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUANTITY + ADD TO CART -->
+
+                <div class="product-actions">
+
+                    <div class="quantity-control">
+
+                        <button
+                            class="quantity-minus"
+                            id="minusBtn"
+                            type="button"
+                        >
+                            −
+                        </button>
+
+                        <span
+                            class="quantity-number"
+                            id="quantity"
+                        >
+                            1
+                        </span>
+
+                        <button
+                            class="quantity-plus"
+                            id="plusBtn"
+                            type="button"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="product-cart-btn"
+                        id="addProductToCart"
+                        type="button"
+                        data-product="Graffiti Beanie"
+                        data-price="200"
+                    >
+                        Add To Cart
+                    </button>
+
+                </div>
+
+
+                <!-- PRODUCT DETAILS -->
+
+                <div class="product-extra">
+
+                    <h3>
+                        Product Details
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            Graffiti-inspired design
+                        </li>
+
+                        <li>
+                            Comfortable everyday fit
+                        </li>
+
+                        <li>
+                            Premium streetwear style
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- SHIPPING -->
+
+                <div class="product-extra">
+
+                    <h3>
+                        Shipping
+                    </h3>
+
+                    <p>
+                        Free shipping on orders over R1000.
+                    </p>
+
+                    <p>
+                        Estimated delivery: 2–5 business days.
+                    </p>
+
+                </div>
+
+
+                <!-- RETURNS -->
+
+                <div class="product-extra">
+
+                    <h3>
+                        Returns
+                    </h3>
+
+                    <p>
+                        Returns accepted within 14 days of delivery.
+                    </p>
+
+                </div>
+
+
+                <!-- PRODUCT BRAND -->
+
+                <p class="product-brand">
+                    Gutter Society
+                </p>
+
+                <h1>
+                    Graffiti Beanie
+                </h1>
+
+                <p class="product-price">
+                    R200
+                </p>
+
+                <p class="product-description">
+
+                    A streetwear essential featuring the
+                    signature Gutter Society graffiti style.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         RELATED PRODUCTS
+    ====================================== -->
+
+    <section class="related-products">
+
+        <h2>
+            You May Also Like
+        </h2>
+
+        <div class="related-grid">
+
+
+            <!-- T-SHIRT -->
+
+            <a
+                href="product-tshirt.html"
+                class="related-card"
+            >
+
+                <img
+                    src="images/products/gutter-tee-front.jpg"
+                    alt="Original Gutter Society Tee"
+                >
+
+                <h3>
+                    Original Gutter Society Tee
+                </h3>
+
+                <p>
+                    R250
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ======================================
+     CART
+====================================== -->
+
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+></div>
+
+
+<aside
+    class="cart-panel"
+    id="cartPanel"
+>
+
+    <div class="cart-header">
+
+        <h2>
+            Your Cart
+        </h2>
+
+        <button
+            class="cart-close"
+            id="cartClose"
+            type="button"
+            aria-label="Close cart"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    >
+
+        <p class="empty-cart-message">
+            Your cart is empty.
+        </p>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="cart-total-row">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="cartTotal">
+                R0
+            </strong>
+
+        </div>
+
+
+        <button
+            class="checkout-btn"
+            id="checkoutButton"
+            type="button"
+        >
+            Checkout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="js/product.js"></script>
+<script src="js/cart.js"></script>
+
+
+<!-- ORDER ADDED POPUP -->
+
+<div class="order-popup" id="orderPopup">
+
+    <div class="order-popup-box">
+
+        <div class="order-popup-icon">
+            ✓
+        </div>
+
+        <h2>
+            Added to Cart
+        </h2>
+
+        <p id="orderPopupMessage">
+            Your item has been added to your cart.
+        </p>
+
+        <button
+            type="button"
+            id="continueShopping"
+        >
+            Continue Shopping
+        </button>
+
+        <button
+            type="button"
+            id="popupViewCart"
+            class="popup-cart-button"
+        >
+            View Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
+```

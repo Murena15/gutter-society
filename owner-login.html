@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Owner Login | Gutter Society</title>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #080808;
+        color: #ffffff;
+        font-family: "Inter", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 420px;
+        background: #111;
+        border: 1px solid #252525;
+        padding: 40px;
+    }
+
+    .logo {
+        display: block;
+        width: 75px;
+        height: 75px;
+        object-fit: contain;
+        margin: 0 auto 25px;
+    }
+
+    .login-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .login-title p {
+        color: #888;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin: 0 0 8px;
+    }
+
+    .login-title h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 42px;
+        letter-spacing: 2px;
+        margin: 0;
+    }
+
+    .form-group {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+
+    label {
+        color: #aaa;
+        font-size: 13px;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        background: #080808;
+        color: #fff;
+        border: 1px solid #333;
+        outline: none;
+        font-family: "Inter", sans-serif;
+    }
+
+    input:focus {
+        border-color: #fff;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 15px;
+        margin-top: 8px;
+        background: #fff;
+        color: #000;
+        border: none;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+
+    .login-btn:hover {
+        background: #ddd;
+    }
+
+    .login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .error-message {
+        display: none;
+        margin-top: 18px;
+        padding: 12px;
+        border: 1px solid #442222;
+        background: #180909;
+        color: #ff9999;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .error-message.show {
+        display: block;
+    }
+
+    .back-shop {
+        display: block;
+        margin-top: 25px;
+        text-align: center;
+        color: #777;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .back-shop:hover {
+        color: #fff;
+    }
+
+    @media (max-width: 500px) {
+
+        .login-box {
+            padding: 30px 20px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+```
+<img
+    src="images/logo/gs-logo.png"
+    alt="Gutter Society"
+    class="logo"
+>
+
+
+<div class="login-title">
+
+    <p>Gutter Society</p>
+
+    <h1>Owner Login</h1>
+
+</div>
+
+
+<form id="loginForm">
+
+
+    <div class="form-group">
+
+        <label for="email">
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            required
+            autocomplete="email"
+            placeholder="Owner email"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            required
+            autocomplete="current-password"
+            placeholder="Password"
+        >
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="login-btn"
+        id="loginButton"
+    >
+        LOGIN
+    </button>
+
+
+    <div
+        class="error-message"
+        id="errorMessage"
+    ></div>
+
+
+</form>
+
+
+<a
+    href="shop.html"
+    class="back-shop"
+>
+    ← Back To Shop
+</a>
+```
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+"use strict";
+
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://fwkewtafidvthvtishax.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_vimLxkw6PKtPBwzbCuZehg_jwCzaRJZ";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        errorMessage.classList.remove("show");
+        errorMessage.textContent = "";
+
+
+        loginButton.disabled = true;
+        loginButton.textContent = "LOGGING IN...";
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+
+        if (error) {
+
+            console.error(
+                "LOGIN ERROR:",
+                error
+            );
+
+            errorMessage.textContent =
+                "Login failed. Please check your email and password.";
+
+            errorMessage.classList.add("show");
+
+            loginButton.disabled = false;
+            loginButton.textContent = "LOGIN";
+
+            return;
+        }
+
+
+        console.log(
+            "Owner logged in:",
+            data.user.email
+        );
+
+
+        window.location.href =
+            "owner-dashboard.html";
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
