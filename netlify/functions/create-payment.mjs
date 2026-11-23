@@ -1,542 +1,143 @@
-"use strict";
 
-import crypto from "crypto";
+const SITE_URL = "https://gutter-society.netlify.app";
+const SUPABASE_URL = "https://fwkewtafidvthvtishax.supabase.co";
 
+export default async function (request) {
+  if (request.method !== "POST") {
+    return Response.json(
+      { error: "Method not allowed." },
+      { status: 405 }
+    );
+  }
 
-/* =========================================
-   SETTINGS
-========================================= */
+  try {
+    const YOCO_SECRET_KEY = process.env.YOCO_SECRET_KEY;
+    const SUPABASE_SERVICE_ROLE_KEY =
+      process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const PAYFAST_URL =
-    "https://www.payfast.co.za/eng/process";
-
-const SITE_URL =
-    "https://gutter-society.netlify.app";
-
-const SUPABASE_URL =
-    "https://fwkewtafidvthvtishax.supabase.co";
-
-const SUPABASE_SERVICE_ROLE_KEY =
-    process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-
-/* =========================================
-   CREATE PAYFAST SIGNATURE
-========================================= */
-
-function generateSignature(data, passphrase = "") {
-
-    let parameterString = "";
-
-    for (const [key, value] of Object.entries(data)) {
-
-        if (
-            value !== undefined &&
-            value !== null &&
-            String(value).trim() !== ""
-        ) {
-
-            parameterString +=
-                `${key}=${encodeURIComponent(
-                    String(value).trim()
-                ).replace(/%20/g, "+")}&`;
-
-        }
-
+    if (!YOCO_SECRET_KEY || !SUPABASE_SERVICE_ROLE_KEY) {
+      throw new Error("Missing server environment variables.");
     }
 
+    const { orderNumber } = await request.json();
 
-    parameterString =
-        parameterString.slice(0, -1);
-
-
-    if (passphrase) {
-
-        parameterString +=
-            `&passphrase=${encodeURIComponent(
-                passphrase.trim()
-            ).replace(/%20/g, "+")}`;
-
+    if (!orderNumber || typeof orderNumber !== "string") {
+      return Response.json(
+        { error: "A valid order number is required." },
+        { status: 400 }
+      );
     }
 
-
-    return crypto
-        .createHash("md5")
-        .update(parameterString)
-        .digest("hex");
-
-}
-
-
-/* =========================================
-   NETLIFY FUNCTION
-========================================= */
-
-export default async (request) => {
-
-    try {
-
-        /* =========================================
-           METHOD CHECK
-        ========================================= */
-
-        if (request.method !== "POST") {
-
-            return new Response(
-                JSON.stringify({
-                    error: "Method not allowed."
-                }),
-                {
-                    status: 405,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        /* =========================================
-           CHECK ENVIRONMENT VARIABLES
-        ========================================= */
-
-        const merchantId =
-            process.env.PAYFAST_MERCHANT_ID;
-
-        const merchantKey =
-            process.env.PAYFAST_MERCHANT_KEY;
-
-        const passphrase =
-            process.env.PAYFAST_PASSPHRASE || "";
-
-
-        if (
-            !merchantId ||
-            !merchantKey ||
-            !SUPABASE_SERVICE_ROLE_KEY
-        ) {
-
-            console.error(
-                "Required payment environment variables are missing."
-            );
-
-            return new Response(
-                JSON.stringify({
-                    error:
-                        "Payment system is not configured correctly."
-                }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        /* =========================================
-           READ REQUEST
-        ========================================= */
-
-        const body =
-            await request.json();
-
-
-        const {
-            orderNumber,
-            firstName,
-            lastName,
-            email,
-            phone
-        } = body;
-
-
-        /* =========================================
-           VALIDATE REQUEST
-        ========================================= */
-
-        if (
-            !orderNumber ||
-            !firstName ||
-            !email
-        ) {
-
-            return new Response(
-                JSON.stringify({
-                    error:
-                        "Missing required payment information."
-                }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        /* =========================================
-           FIND ORDER IN SUPABASE
-        ========================================= */
-
-        const orderResponse =
-            await fetch(
-                `${SUPABASE_URL}/rest/v1/orders?order_number=eq.${encodeURIComponent(
-                    orderNumber
-                )}&select=id,order_number,total,payment_status`,
-                {
-                    method: "GET",
-
-                    headers: {
-                        "apikey":
-                            SUPABASE_SERVICE_ROLE_KEY,
-
-                        "Authorization":
-                            `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
-                    }
-                }
-            );
-
-
-        if (!orderResponse.ok) {
-
-            const errorText =
-                await orderResponse.text();
-
-            console.error(
-                "Supabase order lookup failed:",
-                errorText
-            );
-
-            return new Response(
-                JSON.stringify({
-                    error:
-                        "Could not find the order."
-                }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        const orders =
-            await orderResponse.json();
-
-
-        if (
-            !Array.isArray(orders) ||
-            orders.length === 0
-        ) {
-
-            return new Response(
-                JSON.stringify({
-                    error:
-                        "Order not found."
-                }),
-                {
-                    status: 404,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        const order =
-            orders[0];
-
-
-        /* =========================================
-           CHECK PAYMENT STATUS
-        ========================================= */
-
-        if (
-            order.payment_status === "Paid"
-        ) {
-
-            return new Response(
-                JSON.stringify({
-                    error:
-                        "This order has already been paid."
-                }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        /* =========================================
-           GET TOTAL FROM DATABASE
-        ========================================= */
-
-        const numericAmount =
-            Number(order.total);
-
-
-        if (
-            !Number.isFinite(numericAmount) ||
-            numericAmount <= 0
-        ) {
-
-            return new Response(
-                JSON.stringify({
-                    error:
-                        "Invalid order total."
-                }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        }
-
-
-        /* =========================================
-           FORMAT CUSTOMER DETAILS
-        ========================================= */
-
-        const safeFirstName =
-            String(firstName).trim();
-
-        const safeLastName =
-            String(lastName || "").trim();
-
-        const safeEmail =
-            String(email).trim();
-
-        const safePhone =
-            String(phone || "").trim();
-
-
-        /* =========================================
-           PAYFAST PAYMENT DATA
-        ========================================= */
-
-        const paymentData = {
-
-            merchant_id:
-                merchantId,
-
-            merchant_key:
-                merchantKey,
-
-            return_url:
-                `${SITE_URL}/payment-success.html?order=${encodeURIComponent(
-                    orderNumber
-                )}`,
-
-            cancel_url:
-                `${SITE_URL}/checkout.html?payment=cancelled`,
-
-            notify_url:
-                `${SITE_URL}/.netlify/functions/payfast-itn`,
-
-            name_first:
-                safeFirstName,
-
-            name_last:
-                safeLastName,
-
-            email_address:
-                safeEmail,
-
-            cell_number:
-                safePhone,
-
-            m_payment_id:
-                String(orderNumber),
-
-            amount:
-                numericAmount.toFixed(2),
-
-            item_name:
-                `Gutter Society Order ${orderNumber}`,
-
-            item_description:
-                "Gutter Society online order"
-
-        };
-
-
-        /* =========================================
-           GENERATE SIGNATURE
-        ========================================= */
-
-        paymentData.signature =
-            generateSignature(
-                paymentData,
-                passphrase
-            );
-
-
-        /* =========================================
-           CREATE AUTO-SUBMIT FORM
-        ========================================= */
-
-        let formFields = "";
-
-
-        for (
-            const [key, value]
-            of Object.entries(paymentData)
-        ) {
-
-            formFields += `
-                <input
-                    type="hidden"
-                    name="${escapeHtml(key)}"
-                    value="${escapeHtml(value)}"
-                >
-            `;
-
-        }
-
-
-        const html = `
-
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Secure Payment - Gutter Society
-    </title>
-
-</head>
-
-<body>
-
-    <p>
-        Redirecting you to secure payment...
-    </p>
-
-    <form
-        id="payfastForm"
-        action="${PAYFAST_URL}"
-        method="post"
-    >
-
-        ${formFields}
-
-        <noscript>
-
-            <button type="submit">
-                Continue to Payment
-            </button>
-
-        </noscript>
-
-    </form>
-
-
-    <script>
-
-        document
-            .getElementById("payfastForm")
-            .submit();
-
-    </script>
-
-</body>
-
-</html>
-
-        `;
-
-
-        return new Response(
-            html,
-            {
-                status: 200,
-
-                headers: {
-                    "Content-Type":
-                        "text/html; charset=UTF-8"
-                }
-            }
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "PAYFAST CREATE PAYMENT ERROR:",
-            error
-        );
-
-
-        return new Response(
-            JSON.stringify({
-                error:
-                    "Could not create PayFast payment."
-            }),
-            {
-                status: 500,
-
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                }
-            }
-        );
-
+    // Retrieve the order from Supabase.
+    const orderUrl = new URL(`${SUPABASE_URL}/rest/v1/orders`);
+
+    orderUrl.searchParams.set(
+      "order_number",
+      `eq.${orderNumber}`
+    );
+
+    orderUrl.searchParams.set(
+      "select",
+      "order_number,total,payment_status"
+    );
+
+    const orderResponse = await fetch(orderUrl, {
+      method: "GET",
+      headers: {
+        apikey: SUPABASE_SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+      },
+    });
+
+    if (!orderResponse.ok) {
+      throw new Error("Could not retrieve the order.");
     }
 
-};
+    const orders = await orderResponse.json();
+    const order = orders[0];
 
+    if (!order) {
+      return Response.json(
+        { error: "Order not found." },
+        { status: 404 }
+      );
+    }
 
-/* =========================================
-   HTML ESCAPING
-========================================= */
+    if (
+      String(order.payment_status).toLowerCase() === "paid"
+    ) {
+      return Response.json(
+        { error: "This order has already been paid." },
+        { status: 409 }
+      );
+    }
 
-function escapeHtml(value) {
+    const total = Number(order.total);
 
-    return String(value)
+    if (!Number.isFinite(total) || total <= 0) {
+      return Response.json(
+        { error: "Invalid order total." },
+        { status: 400 }
+      );
+    }
 
-        .replace(/&/g, "&amp;")
+    // Yoco expects the amount in cents, not rands.
+    const amountInCents = Math.round(total * 100);
 
-        .replace(/</g, "&lt;")
+    const checkoutResponse = await fetch(
+      "https://payments.yoco.com/api/checkouts",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${YOCO_SECRET_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: amountInCents,
+          currency: "ZAR",
 
-        .replace(/>/g, "&gt;")
+          successUrl:
+            `${SITE_URL}/payment-success.html?order=${encodeURIComponent(orderNumber)}`,
 
-        .replace(/"/g, "&quot;")
+          cancelUrl:
+            `${SITE_URL}/checkout.html?payment=cancelled`,
 
-        .replace(/'/g, "&#039;");
+          failureUrl:
+            `${SITE_URL}/checkout.html?payment=failed`,
 
+          metadata: {
+            orderNumber: orderNumber,
+          },
+        }),
+      }
+    );
+
+    const checkoutData = await checkoutResponse.json();
+
+    if (!checkoutResponse.ok) {
+      console.error("Yoco checkout error:", checkoutData);
+
+      return Response.json(
+        { error: "Yoco could not create the payment session." },
+        { status: 502 }
+      );
+    }
+
+    if (!checkoutData.redirectUrl) {
+      throw new Error("Yoco did not return a payment URL.");
+    }
+
+    return Response.json({
+      success: true,
+      redirectUrl: checkoutData.redirectUrl,
+    });
+
+  } catch (error) {
+    console.error("Create payment error:", error);
+
+    return Response.json(
+      { error: "Unable to start payment. Please try again." },
+      { status: 500 }
+    );
+  }
 }

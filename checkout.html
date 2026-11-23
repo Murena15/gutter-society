@@ -31,7 +31,6 @@
         href="css/style.css"
     >
 
-
     <style>
 
         /* =========================
@@ -44,24 +43,20 @@
             font-family: "Inter", sans-serif;
         }
 
-
         .checkout-page {
             padding: 140px 20px 80px;
             min-height: 100vh;
         }
-
 
         .checkout-container {
             max-width: 1100px;
             margin: auto;
         }
 
-
         .checkout-title {
             text-align: center;
             margin-bottom: 50px;
         }
-
 
         .checkout-title p {
             color: #999;
@@ -71,7 +66,6 @@
             margin-bottom: 10px;
         }
 
-
         .checkout-title h1 {
             font-family: "Bebas Neue", sans-serif;
             font-size: 60px;
@@ -79,20 +73,17 @@
             margin: 0;
         }
 
-
         .checkout-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr;
             gap: 30px;
         }
 
-
         .checkout-box {
             background: #111;
             border: 1px solid #252525;
             padding: 30px;
         }
-
 
         .checkout-box h2 {
             font-family: "Bebas Neue", sans-serif;
@@ -102,311 +93,184 @@
             margin-bottom: 25px;
         }
 
-
-        /* =========================
-           FORM
-        ========================= */
+        /* FORM */
 
         .checkout-form {
             display: grid;
             gap: 18px;
         }
 
-
         .form-group {
             display: grid;
             gap: 8px;
         }
-
 
         .form-group label {
             font-size: 13px;
             color: #aaa;
         }
 
-
         .form-group input,
         .form-group select {
-
             width: 100%;
             box-sizing: border-box;
-
             background: #080808;
             color: #ffffff;
-
             border: 1px solid #333;
-
             padding: 14px;
-
             font-family: "Inter", sans-serif;
-
             outline: none;
-
         }
-
 
         .form-group input:focus,
         .form-group select:focus {
-
             border-color: #ffffff;
-
         }
-
 
         .form-row {
-
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 15px;
-
         }
 
-
-        /* =========================
-           ORDER SUMMARY
-        ========================= */
+        /* ORDER SUMMARY */
 
         .order-items {
             display: grid;
             gap: 18px;
         }
 
-
         .order-item {
-
             border-bottom: 1px solid #292929;
-
             padding-bottom: 18px;
-
         }
-
 
         .order-item:last-child {
             border-bottom: none;
         }
 
-
         .order-item-name {
-
             font-weight: 600;
-
             margin-bottom: 7px;
-
         }
-
 
         .order-item-details {
-
             color: #999;
-
             font-size: 13px;
-
             line-height: 1.7;
-
         }
-
 
         .order-item-price {
-
             margin-top: 8px;
-
             font-weight: 600;
-
         }
-
 
         .order-total {
-
             border-top: 1px solid #333;
-
             margin-top: 20px;
-
             padding-top: 20px;
-
             display: flex;
-
             justify-content: space-between;
-
             font-size: 18px;
-
         }
-
 
         .order-total strong {
-
             font-size: 22px;
-
         }
 
-
-        /* =========================
-           PLACE ORDER
-        ========================= */
+        /* PLACE ORDER */
 
         .place-order-btn {
-
             width: 100%;
-
             margin-top: 25px;
-
             padding: 17px;
-
             background: #ffffff;
-
             color: #000000;
-
             border: none;
-
             font-weight: 700;
-
             letter-spacing: 1px;
-
             cursor: pointer;
-
             transition: 0.25s ease;
-
         }
-
 
         .place-order-btn:hover {
-
             transform: translateY(-2px);
-
             background: #dddddd;
-
         }
-
 
         .place-order-btn:disabled {
-
             opacity: 0.6;
-
             cursor: not-allowed;
-
             transform: none;
-
         }
-
 
         .back-shop {
-
             display: inline-block;
-
             margin-top: 25px;
-
             color: #aaa;
-
             text-decoration: none;
-
             font-size: 13px;
-
         }
-
 
         .back-shop:hover {
-
             color: #ffffff;
-
         }
-
 
         .empty-checkout {
-
             text-align: center;
-
             padding: 40px 20px;
-
             color: #999;
-
         }
 
-
-        /* =========================
-           PAYMENT MESSAGE
-        ========================= */
+        /* PAYMENT MESSAGE */
 
         .payment-message {
-
             display: none;
-
             text-align: center;
-
             padding: 50px 20px;
-
         }
-
 
         .payment-message.show {
-
             display: block;
-
         }
-
 
         .payment-message h2 {
-
             font-family: "Bebas Neue", sans-serif;
-
             font-size: 42px;
-
             margin-bottom: 15px;
-
         }
-
 
         .payment-message p {
-
             color: #aaa;
-
             line-height: 1.7;
-
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
+        /* MOBILE */
 
         @media (max-width: 800px) {
 
             .checkout-grid {
-
                 grid-template-columns: 1fr;
-
             }
 
-
             .checkout-title h1 {
-
                 font-size: 48px;
-
             }
 
         }
 
-
         @media (max-width: 500px) {
 
             .form-row {
-
                 grid-template-columns: 1fr;
-
             }
-
 
             .checkout-box {
-
                 padding: 20px;
-
             }
 
-
             .checkout-page {
-
                 padding-top: 110px;
-
             }
 
         }
@@ -415,13 +279,9 @@
 
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header class="header scrolled">
 
@@ -438,7 +298,6 @@
             >
 
         </a>
-
 
         <ul class="nav-links desktop-nav">
 
@@ -472,16 +331,11 @@
 
 </header>
 
-
-
-<!-- =========================
-     CHECKOUT
-========================= -->
+<!-- CHECKOUT -->
 
 <main class="checkout-page">
 
     <div class="checkout-container">
-
 
         <div class="checkout-title">
 
@@ -491,27 +345,20 @@
 
         </div>
 
-
-
         <div id="checkoutContent">
 
             <div class="checkout-grid">
 
-
-                <!-- =========================
-                     CUSTOMER INFORMATION
-                ========================= -->
+                <!-- CUSTOMER INFORMATION -->
 
                 <div class="checkout-box">
 
                     <h2>Customer Details</h2>
 
-
                     <form
                         class="checkout-form"
                         id="checkoutForm"
                     >
-
 
                         <div class="form-group">
 
@@ -528,7 +375,6 @@
 
                         </div>
 
-
                         <div class="form-group">
 
                             <label for="email">
@@ -543,7 +389,6 @@
                             >
 
                         </div>
-
 
                         <div class="form-group">
 
@@ -560,11 +405,9 @@
 
                         </div>
 
-
                         <h2 style="margin-top:20px;">
                             Delivery Details
                         </h2>
-
 
                         <div class="form-group">
 
@@ -581,9 +424,7 @@
 
                         </div>
 
-
                         <div class="form-row">
-
 
                             <div class="form-group">
 
@@ -599,7 +440,6 @@
                                 >
 
                             </div>
-
 
                             <div class="form-group">
 
@@ -658,7 +498,6 @@
 
                         </div>
 
-
                         <div class="form-group">
 
                             <label for="postal">
@@ -674,7 +513,6 @@
 
                         </div>
 
-
                         <button
                             type="submit"
                             class="place-order-btn"
@@ -682,27 +520,20 @@
                             PROCEED TO PAYMENT
                         </button>
 
-
                     </form>
 
                 </div>
 
-
-
-                <!-- =========================
-                     ORDER SUMMARY
-                ========================= -->
+                <!-- ORDER SUMMARY -->
 
                 <div class="checkout-box">
 
                     <h2>Your Order</h2>
 
-
                     <div
                         class="order-items"
                         id="orderItems"
                     ></div>
-
 
                     <div class="order-total">
 
@@ -716,7 +547,6 @@
 
                     </div>
 
-
                     <a
                         href="shop.html"
                         class="back-shop"
@@ -726,16 +556,11 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
-
-
-        <!-- =========================
-             PAYMENT MESSAGE
-        ========================= -->
+        <!-- PAYMENT MESSAGE -->
 
         <div
             class="payment-message"
@@ -748,21 +573,16 @@
 
             <p>
                 Please wait while we securely redirect
-                you to PayFast.
+                you to Yoco.
             </p>
 
         </div>
-
 
     </div>
 
 </main>
 
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<!-- JAVASCRIPT -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -770,15 +590,13 @@
 
 "use strict";
 
-
 /* =========================
    SUPABASE
 ========================= */
 
-const SUPABASE_URL = 
+const SUPABASE_URL =
     "https://fwkewtafidvthvtishax.supabase.co";
-   
-   
+
 const SUPABASE_KEY =
     "sb_publishable_vimLxkw6PKtPBwzbCuZehg_jwCzaRJZ";
 
@@ -788,7 +606,6 @@ const supabaseClient =
         SUPABASE_KEY
     );
 
-
 /* =========================
    LOAD CART
 ========================= */
@@ -797,7 +614,6 @@ let cart =
     JSON.parse(
         localStorage.getItem("gutterCart")
     ) || [];
-
 
 const orderItems =
     document.getElementById("orderItems");
@@ -813,7 +629,6 @@ const checkoutContent =
 
 const paymentMessage =
     document.getElementById("paymentMessage");
-
 
 /* =========================
    DISPLAY ORDER
@@ -849,9 +664,7 @@ function displayOrder() {
         return;
     }
 
-
     let total = 0;
-
 
     cart.forEach((item) => {
 
@@ -866,13 +679,11 @@ function displayOrder() {
 
         total += itemTotal;
 
-
         const div =
             document.createElement("div");
 
         div.className =
             "order-item";
-
 
         div.innerHTML = `
 
@@ -898,20 +709,16 @@ function displayOrder() {
 
         `;
 
-
         orderItems.appendChild(div);
 
     });
-
 
     orderTotal.textContent =
         `R${total.toFixed(2)}`;
 
 }
 
-
 displayOrder();
-
 
 /* =========================
    GENERATE ORDER NUMBER
@@ -934,32 +741,6 @@ function generateOrderNumber() {
 
 }
 
-
-/* =========================
-   SPLIT CUSTOMER NAME
-========================= */
-
-function splitName(fullName) {
-
-    const parts =
-        fullName
-            .trim()
-            .split(/\s+/);
-
-    const firstName =
-        parts.shift() || "";
-
-    const lastName =
-        parts.join(" ");
-
-    return {
-        firstName,
-        lastName
-    };
-
-}
-
-
 /* =========================
    SUBMIT ORDER
 ========================= */
@@ -969,7 +750,6 @@ checkoutForm.addEventListener(
     async function(event) {
 
         event.preventDefault();
-
 
         if (cart.length === 0) {
 
@@ -981,10 +761,7 @@ checkoutForm.addEventListener(
 
         }
 
-
-        /* =========================
-           CUSTOMER DETAILS
-        ========================= */
+        /* CUSTOMER DETAILS */
 
         const customerName =
             document
@@ -1027,10 +804,7 @@ checkoutForm.addEventListener(
                 .value
                 .trim();
 
-
-        /* =========================
-           CALCULATE TOTAL
-        ========================= */
+        /* CALCULATE TOTAL */
 
         const total =
             cart.reduce(
@@ -1040,7 +814,6 @@ checkoutForm.addEventListener(
                     Number(item.quantity),
                 0
             );
-
 
         if (
             !Number.isFinite(total) ||
@@ -1055,18 +828,12 @@ checkoutForm.addEventListener(
 
         }
 
-
-        /* =========================
-           CREATE ORDER NUMBER
-        ========================= */
+        /* CREATE ORDER NUMBER */
 
         const orderNumber =
             generateOrderNumber();
 
-
-        /* =========================
-           PREPARE PRODUCTS
-        ========================= */
+        /* PREPARE PRODUCTS */
 
         const products =
             cart.map((item) => ({
@@ -1085,10 +852,7 @@ checkoutForm.addEventListener(
 
             }));
 
-
-        /* =========================
-           CREATE PENDING ORDER
-        ========================= */
+        /* CREATE PENDING ORDER */
 
         const order = {
 
@@ -1130,10 +894,7 @@ checkoutForm.addEventListener(
 
         };
 
-
-        /* =========================
-           DISABLE BUTTON
-        ========================= */
+        /* DISABLE BUTTON */
 
         const button =
             checkoutForm.querySelector(
@@ -1145,10 +906,7 @@ checkoutForm.addEventListener(
         button.textContent =
             "PROCESSING...";
 
-
-        /* =========================
-           SAVE ORDER TO SUPABASE
-        ========================= */
+        /* SAVE ORDER TO SUPABASE */
 
         const {
             error: orderError
@@ -1157,10 +915,7 @@ checkoutForm.addEventListener(
                 .from("orders")
                 .insert([order]);
 
-
-        /* =========================
-           SUPABASE ERROR
-        ========================= */
+        /* SUPABASE ERROR */
 
         if (orderError) {
 
@@ -1183,183 +938,113 @@ checkoutForm.addEventListener(
 
         }
 
+        /* SHOW PAYMENT MESSAGE */
 
-        /* =========================
-           SPLIT NAME
-        ========================= */
+        checkoutContent.style.display = "none";
+        paymentMessage.classList.add("show");
 
-        const {
-            firstName,
-            lastName
-        } =
-            splitName(customerName);
-
-
-        /* =========================
-           SHOW PAYMENT MESSAGE
-        ========================= */
-
-        checkoutContent.style.display =
-            "none";
-
-        paymentMessage.classList.add(
-            "show"
-        );
-
-
-        /* =========================
-           CREATE PAYFAST PAYMENT
-        ========================= */
+        /* CREATE YOCO CHECKOUT */
 
         try {
 
-            const paymentResponse =
-                await fetch(
-                    "/.netlify/functions/create-payment",
-                    {
-                        method: "POST",
+            const paymentResponse = await fetch(
+                "/.netlify/functions/create-payment",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        orderNumber: orderNumber
+                    })
+                }
+            );
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+            let paymentData = {};
 
-                        body:
-                            JSON.stringify({
+            try {
 
-                                orderNumber:
-                                    orderNumber,
+                paymentData =
+                    await paymentResponse.json();
 
-                                firstName:
-                                    firstName,
+            } catch (jsonError) {
 
-                                lastName:
-                                    lastName,
-
-                                email:
-                                    customerEmail,
-
-                                phone:
-                                    customerPhone
-
-                            })
-
-                    }
+                throw new Error(
+                    "The payment service returned an invalid response."
                 );
 
-
-            /* =========================
-               PAYMENT FUNCTION ERROR
-            ========================= */
+            }
 
             if (!paymentResponse.ok) {
 
-                const errorText =
-                    await paymentResponse.text();
-
                 console.error(
-                    "PAYFAST FUNCTION ERROR:",
-                    errorText
+                    "YOCO FUNCTION ERROR:",
+                    paymentData
                 );
 
                 throw new Error(
-                    "Could not start PayFast payment."
+                    paymentData.error ||
+                    "Could not start Yoco payment."
                 );
 
             }
 
-
-            /* =========================
-               GET PAYFAST HTML
-            ========================= */
-
-            const paymentHtml =
-                await paymentResponse.text();
-
-
             if (
-                !paymentHtml ||
-                !paymentHtml.includes(
-                    "payfastForm"
-                )
+                !paymentData.success ||
+                !paymentData.redirectUrl
             ) {
 
                 console.error(
-                    "Invalid PayFast response:",
-                    paymentHtml
+                    "INVALID YOCO RESPONSE:",
+                    paymentData
                 );
 
                 throw new Error(
-                    "Invalid PayFast payment response."
+                    "Yoco did not provide a valid payment link."
                 );
 
             }
 
-
-            /* =========================
-               SAVE ORDER NUMBER
-            ========================= */
+            /* SAVE ORDER NUMBER */
 
             localStorage.setItem(
                 "lastOrderNumber",
                 orderNumber
             );
 
+            /* CLEAR CART */
 
-            /* =========================
-               CLEAR CART
-            ========================= */
+            localStorage.removeItem("gutterCart");
 
-            localStorage.removeItem(
-                "gutterCart"
+            /* REDIRECT TO YOCO */
+
+            window.location.assign(
+                paymentData.redirectUrl
             );
-
-
-            /* =========================
-               LOAD PAYFAST PAGE
-            ========================= */
-
-            document.open();
-
-            document.write(
-                paymentHtml
-            );
-
-            document.close();
-
 
         } catch (paymentError) {
 
             console.error(
-                "PAYFAST PAYMENT ERROR:",
+                "YOCO PAYMENT ERROR:",
                 paymentError
             );
-
 
             alert(
                 "We could not start the payment.\n\n" +
                 "Your order has been saved, but payment was not started.\n\n" +
-                "Please try again."
+                paymentError.message
             );
 
-
-            paymentMessage.classList.remove(
-                "show"
-            );
-
-            checkoutContent.style.display =
-                "block";
+            paymentMessage.classList.remove("show");
+            checkoutContent.style.display = "block";
 
             button.disabled = false;
-
-            button.textContent =
-                "PROCEED TO PAYMENT";
+            button.textContent = "PROCEED TO PAYMENT";
 
         }
 
     }
 );
-
 
 /* =========================
    HTML ESCAPING
