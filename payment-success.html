@@ -1,19 +1,38 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Payment Confirmation | Gutter Society">
-    <title>Payment Confirmation | Gutter Society</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Payment Successful | Gutter Society"
+    >
+
+    <title>Payment Successful | Gutter Society</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
     <style>
+
         body {
             background: #080808;
-            color: #fff;
+            color: #ffffff;
             font-family: "Inter", sans-serif;
             min-height: 100vh;
         }
@@ -40,7 +59,7 @@
         .success-icon {
             width: 70px;
             height: 70px;
-            border: 2px solid #777;
+            border: 2px solid #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -63,7 +82,7 @@
         }
 
         .order-number {
-            color: #fff !important;
+            color: #ffffff !important;
             font-weight: 700;
             font-size: 18px;
             margin-top: 25px !important;
@@ -74,7 +93,7 @@
             margin-top: 20px;
             padding: 10px 18px;
             border: 1px solid #333;
-            color: #fff;
+            color: #ffffff;
             font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -84,8 +103,8 @@
             display: inline-block;
             margin-top: 30px;
             padding: 15px 25px;
-            background: #fff;
-            color: #000;
+            background: #ffffff;
+            color: #000000;
             text-decoration: none;
             font-weight: 700;
             letter-spacing: 1px;
@@ -93,7 +112,7 @@
         }
 
         .back-shop:hover {
-            background: #ddd;
+            background: #dddddd;
             transform: translateY(-2px);
         }
 
@@ -106,148 +125,92 @@
                 font-size: 45px;
             }
         }
+
     </style>
+
 </head>
 
 <body>
 
 <main class="success-page">
+
     <div class="success-box">
 
-        <div class="success-icon" id="successIcon">...</div>
+        <div class="success-icon">
+            ✓
+        </div>
 
-        <h1 id="successTitle">Checking Payment</h1>
+        <h1>
+            Payment Received
+        </h1>
 
-        <p id="successMessage">
-            Please wait while we verify your payment securely.
+        <p>
+            Thank you for your order with
+            Gutter Society.
         </p>
 
-        <p class="order-number" id="orderNumber">
+        <p>
+            Your payment has been submitted
+            successfully.
+        </p>
+
+        <p
+            class="order-number"
+            id="orderNumber"
+        >
             Order Number: Loading...
         </p>
 
-        <div class="payment-status" id="paymentStatus">
-            Checking
+        <div class="payment-status">
+            Payment Processing
         </div>
 
-        <p id="additionalMessage">
-            Your order confirmation will appear here.
+        <p>
+            Your order will be confirmed once
+            PayFast sends the final payment
+            confirmation to our system.
         </p>
 
-        <a href="shop.html" class="back-shop">
+        <a
+            href="shop.html"
+            class="back-shop"
+        >
             BACK TO SHOP
         </a>
 
     </div>
+
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
+
 "use strict";
 
-const SUPABASE_URL =
-    "https://fwkewtafidvthvtishax.supabase.co";
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
 
-const SUPABASE_KEY =
-    "sb_publishable_vimLxkw6PKtPBwzbCuZehg_jwCzaRJZ";
+const orderNumber =
+    params.get("order");
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const orderNumberElement =
+    document.getElementById(
+        "orderNumber"
+    );
 
-const params = new URLSearchParams(window.location.search);
-const orderNumber = params.get("order");
+if (orderNumber) {
 
-const title = document.getElementById("successTitle");
-const message = document.getElementById("successMessage");
-const number = document.getElementById("orderNumber");
-const status = document.getElementById("paymentStatus");
-const additional = document.getElementById("additionalMessage");
-const icon = document.getElementById("successIcon");
+    orderNumberElement.textContent =
+        `Order Number: ${orderNumber}`;
 
-number.textContent = orderNumber
-    ? `Order Number: ${orderNumber}`
-    : "Order Number: Not available";
+} else {
 
-function showState(heading, description, paymentLabel, extra, symbol) {
-    title.textContent = heading;
-    message.textContent = description;
-    status.textContent = paymentLabel;
-    additional.textContent = extra;
-    icon.textContent = symbol;
+    orderNumberElement.textContent =
+        "Order Number: Not available";
+
 }
 
-async function verifyPayment() {
-    if (!orderNumber) {
-        showState(
-            "Order Not Found",
-            "We could not identify your order.",
-            "Not Verified",
-            "Please contact Gutter Society for assistance.",
-            "!"
-        );
-        return;
-    }
-
-    try {
-        const { data, error } = await supabaseClient
-            .from("orders")
-            .select("order_number, payment_status")
-            .eq("order_number", orderNumber)
-            .maybeSingle();
-
-        if (error) {
-            throw error;
-        }
-
-        if (!data) {
-            showState(
-                "Order Not Found",
-                "We could not locate this order.",
-                "Not Verified",
-                "Please contact Gutter Society for assistance.",
-                "!"
-            );
-            return;
-        }
-
-        if (
-            String(data.payment_status).toLowerCase() === "paid"
-        ) {
-            showState(
-                "Payment Confirmed",
-                "Thank you for your order with Gutter Society.",
-                "Payment Verified",
-                "Your payment has been confirmed. Your order is now recorded.",
-                "✓"
-            );
-            return;
-        }
-
-        showState(
-            "Payment Processing",
-            "Your payment has not yet been confirmed.",
-            "Awaiting Confirmation",
-            "Please allow some time for payment confirmation. If this continues, contact Gutter Society.",
-            "..."
-        );
-
-    } catch (error) {
-        console.error("Payment verification error:", error);
-
-        showState(
-            "Verification Unavailable",
-            "We could not verify your payment right now.",
-            "Please Wait",
-            "Please refresh this page shortly or contact Gutter Society.",
-            "!"
-        );
-    }
-}
-
-verifyPayment();
 </script>
 
 </body>
